@@ -88,7 +88,7 @@
             <hr>
             <div class="row" ng-repeat="step in stepsCtrl.steps">
               <div class="col-xs-12">
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                   <div class="panel-heading">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                     {{ step.title }}
@@ -103,33 +103,151 @@
                       </div>
                     </form>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Problems</div>
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Type</div>
                       <div class="panel-body">
-                        <div ng-repeat="problem in step.problems">
-                          <div class="row">
-                            <div class="col-xs-12">
-                              <form class="form-horizontal">
-                                <div class="form-group">
-                                  <label class="col-sm-2 control-label">Problem type:</label>
-                                  <div class="col-sm-10">
-                                    <select class="form-control">
-                                      <option value="inconvenient">Inconvenient</option>
-                                      <option value="confusing">Confusing</option>
-                                      <option value="difficult">Difficult</option>
-                                      <option value="likely_to_fail">Likely to fail</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label class="col-sm-2 control-label">Reason:</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Reason...">
-                                  </div>
-                                </div>
-                              </form>
+                        <form class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">Type:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control">
+                                <option value="process">Process</option>
+                                <option value="decision">Decision</option>
+                                <option value="wait">Wait</option>
+                                <option value="divergent-process">Divergent Process</option>
+                              </select>
                             </div>
                           </div>
-                          <hr>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Position</div>
+                      <div class="panel-body">
+                        <form class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">Position:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control">
+                                <option value="ip-provider">IP—Provider</option>
+                                <option value="si-provider">SI—Provider</option>
+                                <option value="di-provider">DI—Provider</option>
+                                <option value="di">DI</option>
+                                <option value="di-customer">DI—Customer</option>
+                                <option value="si-customer">SI—Customer</option>
+                                <option value="ip-customer">IP—Customer</option>
+                              </select>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Predecessors</div>
+                      <div class="panel-body">
+                        <div class="well well-sm" ng-repeat="predecessor in step.predecessors">
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Step:</label>
+                              <div class="col-sm-10">
+                                <select class="form-control">
+                                  <option value="none">None</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Relationship</label>
+                              <div class="col-sm-10">
+                                <select class="form-control">
+                                  <option value="normal">Normal</option>
+                                  <option value="loose-temporal">Loose Temporal</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Title</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Relationship title...">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <a class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Predecessor</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Value</div>
+                      <div class="panel-body">
+                        <form class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">Specific Value:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control">
+                                <option value="p-3">3</option>
+                                <option value="p-2">2</option>
+                                <option value="p-1">1</option>
+                                <option value="zero" selected>0</option>
+                                <option value="n-1">-1</option>
+                                <option value="n-2">-2</option>
+                                <option value="n-3">-3</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">Generic Value:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control">
+                                <option value="p-3">3</option>
+                                <option value="p-2">2</option>
+                                <option value="p-1">1</option>
+                                <option value="zero" selected>0</option>
+                                <option value="n-1">-1</option>
+                                <option value="n-2">-2</option>
+                                <option value="n-3">-3</option>
+                              </select>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Other Options</div>
+                      <div class="panel-body">
+                        <form>
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox"> Emphasized
+                            </label>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Problems</div>
+                      <div class="panel-body">
+                        <div class="well well-sm" ng-repeat="problem in step.problems">
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Problem type:</label>
+                              <div class="col-sm-10">
+                                <select class="form-control">
+                                  <option value="inconvenient">Inconvenient</option>
+                                  <option value="confusing">Confusing</option>
+                                  <option value="difficult">Difficult</option>
+                                  <option value="likely_to_fail">Likely to fail</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Reason:</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Reason...">
+                              </div>
+                            </div>
+                          </form>
                         </div>
                         <div class="row">
                           <div class="col-xs-12">

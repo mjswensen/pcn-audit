@@ -8,13 +8,15 @@
 
     this.steps = [{
       title: 'test',
-      problems: [1,2]
+      problems: [1,2],
+      predecessors: [1]
     }];
 
     this.addStep = function() {
       this.steps.push({
         title: 'New Step',
-        problems: []
+        problems: [],
+        predecessors: []
       });
     };
 

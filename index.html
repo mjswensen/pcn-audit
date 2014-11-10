@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="pcnAudit">
 <head>
   <meta charset="utf-8">
   <title>PCN Audit</title>
@@ -62,7 +62,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <div class="panel panel-default">
+        <div class="panel panel-primary" ng-controller="StepsController as stepsCtrl">
           <div class="panel-heading">Process Steps</div>
           <div class="panel-body">
             <div class="row">
@@ -70,8 +70,8 @@
                 <form>
                   <div class="form-group">
                     <div class="checkbox">
-                      <label for="advanced-features">
-                        <input type="checkbox" name="advanced-features">
+                      <label>
+                        <input type="checkbox" ng-model="stepsCtrl.showAdvanced">
                         Show advanced features
                       </label>
                     </div>
@@ -79,8 +79,72 @@
                 </form>
               </div>
               <div class="col-sm-6">
-                <button type="button" class="btn btn-default">Expand all</button>
-                <button type="button" class="btn btn-default">Collapse all</button>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default">Expand all</button>
+                  <button type="button" class="btn btn-default">Collapse all</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row" ng-repeat="step in stepsCtrl.steps">
+              <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    {{ step.title }}
+                  </div>
+                  <div class="panel-body">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label for="step-title" class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
+                        </div>
+                      </div>
+                    </form>
+                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
+                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Problems</div>
+                      <div class="panel-body">
+                        <div ng-repeat="problem in step.problems">
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <form class="form-horizontal">
+                                <div class="form-group">
+                                  <label class="col-sm-2 control-label">Problem type:</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-control">
+                                      <option value="inconvenient">Inconvenient</option>
+                                      <option value="confusing">Confusing</option>
+                                      <option value="difficult">Difficult</option>
+                                      <option value="likely_to_fail">Likely to fail</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-sm-2 control-label">Reason:</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Reason...">
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                          <hr>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <a class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Problem</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <a class="btn btn-success" ng-click="stepsCtrl.addStep()"><span class="glyphicon glyphicon-plus"></span> Add Step</a>
               </div>
             </div>
           </div>
@@ -88,5 +152,7 @@
       </div>
     </div>
   </section>
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

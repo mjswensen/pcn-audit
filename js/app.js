@@ -1,25 +1,21 @@
 (function() {
 
-  var app = angular.module('pcnAudit', []);
+  var app = angular.module('pcnAudit', ['StepModel']);
 
-  app.controller('StepsController', function() {
+  app.controller('StepsController', [
+    'Step',
+    function(Step) {
 
-    this.showAdvanced = false;
+      this.showAdvanced = false;
 
-    this.steps = [{
-      title: 'test',
-      problems: [1,2],
-      predecessors: [1]
-    }];
+      this.steps = [];
 
-    this.addStep = function() {
-      this.steps.push({
-        title: 'New Step',
-        problems: [],
-        predecessors: []
-      });
-    };
+      this.addStep = function() {
+        this.steps.push(new Step());
+        console.log(this.steps);
+      };
 
-  });
+    }
+  ]);
 
 })();

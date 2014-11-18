@@ -12,7 +12,18 @@
 
       this.addStep = function() {
         this.steps.push(new Step());
-        console.log(this.steps);
+      };
+
+      this.expandAll = function() {
+        this.steps.forEach(function(step) {
+          step.expandCompletely();
+        });
+      };
+
+      this.collapseAll = function() {
+        this.steps.forEach(function(step) {
+          step.collapseCompletely();
+        });
       };
 
     }

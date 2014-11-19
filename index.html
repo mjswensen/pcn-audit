@@ -80,8 +80,8 @@
               </div>
               <div class="col-sm-6">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default">Expand all</button>
-                  <button type="button" class="btn btn-default">Collapse all</button>
+                  <button type="button" class="btn btn-default" ng-click="stepsCtrl.expandAll()">Expand all</button>
+                  <button type="button" class="btn btn-default" ng-click="stepsCtrl.collapseAll()">Collapse all</button>
                 </div>
               </div>
             </div>
@@ -89,11 +89,11 @@
             <div class="row" ng-repeat="step in stepsCtrl.steps">
               <div class="col-xs-12">
                 <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
+                  <div class="panel-heading" ng-click="step.toggleVisibility()">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}"></span>
                     {{ step.title }}
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">
                       <div class="form-group">
                         <label for="step-title" class="col-sm-2 control-label">Title</label>
@@ -103,8 +103,8 @@
                       </div>
                     </form>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Type</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('type')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.type, 'glyphicon-chevron-right': step.collapsedSections.type}"></span> Type</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.type">
                         <form class="form-horizontal">
                           <div class="form-group">
                             <label class="col-sm-2 control-label">Type:</label>
@@ -121,8 +121,8 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Position</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('position')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.position, 'glyphicon-chevron-right': step.collapsedSections.position}"></span> Position</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.position">
                         <form class="form-horizontal">
                           <div class="form-group">
                             <label class="col-sm-2 control-label">Position:</label>
@@ -142,8 +142,8 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Predecessors</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('predecessors')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.predecessors, 'glyphicon-chevron-right': step.collapsedSections.predecessors}"></span> Predecessors</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.predecessors">
                         <div class="well well-sm" ng-repeat="predecessor in step.predecessors">
                           <form class="form-horizontal">
                             <div class="form-group">
@@ -180,8 +180,8 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Value</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('value')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.value, 'glyphicon-chevron-right': step.collapsedSections.value}"></span> Value</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.value">
                         <form class="form-horizontal">
                           <div class="form-group">
                             <label class="col-sm-2 control-label">Specific Value:</label>
@@ -215,8 +215,8 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Other Options</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('other')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.other, 'glyphicon-chevron-right': step.collapsedSections.other}"></span> Other Options</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.other">
                         <form>
                           <div class="checkbox">
                             <label>
@@ -227,8 +227,8 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading"><span class="glyphicon glyphicon-chevron-down"></span> Problems</div>
-                      <div class="panel-body">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.problems">
                         <div class="well well-sm" ng-repeat="problem in step.problems">
                           <form class="form-horizontal">
                             <div class="form-group">

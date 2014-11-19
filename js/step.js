@@ -20,8 +20,8 @@
         this.title = 'New Step';
         this.type = 'process';
         this.position = 'ip-provider';
-        this.specificValue = 'zero';
-        this.genericValue = 'zero';
+        this.value_specific = 'zero';
+        this.value_generic = 'zero';
         this.emphasized = false;
         this.predecessors = [];
         this.problems = [];

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-<body>
+<body ng-controller="StepsController as stepsCtrl">
   <nav class="navbar navbar-inverse">
     <div class="navbar-header">
       <div class="navbar-brand">PCN Audit</div>
@@ -24,25 +24,25 @@
                   <div class="form-group">
                     <label for="process" class="col-sm-4 control-label">Process</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="process" placeholder="Process title...">
+                      <input type="text" class="form-control" name="process" placeholder="Process title..." ng-model="stepsCtrl.data.metadata.title">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="industry" class="col-sm-4 control-label">Industry</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="industry" placeholder="Industry name...">
+                      <input type="text" class="form-control" name="industry" placeholder="Industry name..." ng-model="stepsCtrl.data.metadata.industry">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="provider" class="col-sm-4 control-label">Provider</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="provider" placeholder="Provider name...">
+                      <input type="text" class="form-control" name="provider" placeholder="Provider name..." ng-model="stepsCtrl.data.domains[0].title">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="customer" class="col-sm-4 control-label">Customer</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" name="customer" placeholder="Customer name...">
+                      <input type="text" class="form-control" name="customer" placeholder="Customer name..." ng-model="stepsCtrl.data.domains[1].title">
                     </div>
                   </div>
                 </form>
@@ -51,7 +51,7 @@
                 <form>
                   <div class="form-group">
                     <label for="description" class="control-label">Description</label>
-                    <textarea class="form-control" name="description" placeholder="Process description..." rows="3"></textarea>
+                    <textarea class="form-control" name="description" placeholder="Process description..." rows="3" ng-model="stepsCtrl.data.metadata.description"></textarea>
                   </div>
                 </form>
               </div>
@@ -62,7 +62,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <div class="panel panel-primary" ng-controller="StepsController as stepsCtrl">
+        <div class="panel panel-primary">
           <div class="panel-heading">Process Steps</div>
           <div class="panel-body">
             <div class="row">
@@ -86,7 +86,7 @@
               </div>
             </div>
             <hr>
-            <div class="row" ng-repeat="step in stepsCtrl.steps">
+            <div class="row" ng-repeat="step in stepsCtrl.data.steps">
               <div class="col-xs-12">
                 <div class="panel panel-info">
                   <div class="panel-heading" ng-click="step.toggleVisibility()">
@@ -125,16 +125,30 @@
                       <div class="panel-body" ng-hide="step.collapsedSections.position">
                         <form class="form-horizontal">
                           <div class="form-group">
-                            <label class="col-sm-2 control-label">Position:</label>
+                            <label class="col-sm-2 control-label">This Entity:</label>
                             <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.position">
-                                <option value="ip-provider">IP–Provider</option>
-                                <option value="si-provider">SI–Provider</option>
-                                <option value="di-provider">DI–Provider</option>
-                                <option value="di">DI</option>
-                                <option value="di-customer">DI–Customer</option>
-                                <option value="si-customer">SI–Customer</option>
-                                <option value="ip-customer">IP–Customer</option>
+                              <select class="form-control" ng-model="step.domain.id">
+                                <option ng-repeat="domain in stepsCtrl.data.domains" ng-value="domain.id">{{ domain.title }}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">In Region:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control" ng-model="step.domain.region.type">
+                                <option value="independent">Independent</option>
+                                <option value="surrogate">Surrogate</option>
+                                <option value="direct_leading">Direct Leading</option>
+                                <option value="direct_shared">Direct Shared</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">  
+                            <label class="col-sm-2 control-label">With:</label>
+                            <div class="col-sm-10">
+                              <select class="form-control" ng-model="step.domain.region.with_domain">
+                                <option value="">None</option>
+                                <option ng-repeat="domain in stepsCtrl.data.domains" ng-value="domain.id">{{ domain.title }}</option>
                               </select>
                             </div>
                           </div>
@@ -151,7 +165,7 @@
                               <div class="col-sm-10">
                                 <select class="form-control" ng-model="predecessor.id">
                                   <option value="">None</option>
-                                  <option ng-repeat="predecessorStep in stepsCtrl.steps" value="predecessorStep.id">{{ predecessorStep.title }}</option>
+                                  <option ng-repeat="predecessorStep in stepsCtrl.data.steps" ng-value="predecessorStep.id">{{ predecessorStep.title }}</option>
                                 </select>
                               </div>
                             </div>
@@ -186,7 +200,7 @@
                           <div class="form-group">
                             <label class="col-sm-2 control-label">Specific Value:</label>
                             <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.specificValue">
+                              <select class="form-control" ng-model="step.value_specific">
                                 <option value="p-3">3</option>
                                 <option value="p-2">2</option>
                                 <option value="p-1">1</option>
@@ -200,7 +214,7 @@
                           <div class="form-group">
                             <label class="col-sm-2 control-label">Generic Value:</label>
                             <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.genericValue">
+                              <select class="form-control" ng-model="step.value_generic">
                                 <option value="p-3">3</option>
                                 <option value="p-2">2</option>
                                 <option value="p-1">1</option>
@@ -280,7 +294,9 @@
                 <form>
                   <div class="form-group">
                     <label for="json" class="control-label">Output JSON</label>
-                    <textarea class="form-control" name="json" placeholder="JSON Output..." rows="3"></textarea>
+                    <textarea class="form-control" name="json" placeholder="JSON Output..." rows="20">
+                        {{stepsCtrl.data | json}}
+                    </textarea>
                     <br/>
                     <p>Copy and Paste the JSON above into your desired PCN Diagram Generator.</p>
                   </div>

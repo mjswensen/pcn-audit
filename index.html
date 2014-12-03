@@ -155,10 +155,14 @@
                       </div>
                     </form>
                     <div class="panel panel-default">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems</div>
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems
+                      </div>
                       <div class="panel-body" ng-hide="step.collapsedSections.problems">
                         <div class="well well-sm" ng-repeat="problem in step.problems">
                           <form class="form-horizontal">
+                            <div class="pull-right">
+                              <span class="glyphicon glyphicon-minus" ng-click="step.removeProblem(problem)"></span>
+                            </div>
                             <div class="form-group">
                               <label class="col-sm-2 control-label">Problem type:</label>
                               <div class="col-sm-10">

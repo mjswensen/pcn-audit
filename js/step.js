@@ -36,6 +36,11 @@
           this.problems.push(new Problem());
         };
 
+        this.removeProblem = function(problem) {
+          var idx = this.problems.indexOf(problem);
+          this.problems.splice(idx, 1);
+        };
+
         // UI
 
         this.collapsed = false;

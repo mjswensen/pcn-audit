@@ -90,18 +90,66 @@
               <div class="col-xs-12">
                 <div class="panel panel-info">
                   <div class="panel-heading" ng-click="step.toggleVisibility()">
-                    <span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}"></span>
-                    {{ step.title }}
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}"></span><input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
                   </div>
                   <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">
                       <div class="form-group">
-                        <label for="step-title" class="col-sm-2 control-label">Title</label>
+                        <label class="col-sm-2 control-label">Specific Value:</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
+                          <select class="form-control" ng-model="step.value_specific">
+                            <option value="p-2">Very valuable</option>
+                            <option value="p-1">Somewhat valuable</option>
+                            <option value="zero" selected>Necessary but not valuable</option>
+                            <option value="n-1">Not necessary nor valuable</option>
+                          </select>
                         </div>
                       </div>
                     </form>
+                    <form class="form-horizontal" ng-show="stepsCtrl.showAdvanced">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Generic Value:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" ng-model="step.value_generic">
+                            <option value="p-2">Very valuable</option>
+                            <option value="p-1">Somewhat valuable</option>
+                            <option value="zero" selected>Necessary but not valuable</option>
+                            <option value="n-1">Not necessary nor valuable</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="panel panel-default" ng-hide="step.collapsed">
+                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems</div>
+                      <div class="panel-body" ng-hide="step.collapsedSections.problems">
+                        <div class="well well-sm" ng-repeat="problem in step.problems">
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Problem type:</label>
+                              <div class="col-sm-10">
+                                <select class="form-control" ng-model="problem.type">
+                                  <option value="inconvenient">Inconvenient</option>
+                                  <option value="confusing">Confusing</option>
+                                  <option value="difficult">Difficult</option>
+                                  <option value="likely_to_fail">Likely to fail</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label">Reason:</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Reason..." ng-model="problem.description">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <a class="btn btn-success" ng-click="step.addProblem()"><span class="glyphicon glyphicon-plus"></span> Add Problem</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
                       <div class="panel-heading" ng-click="step.toggleSectionVisibility('type')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.type, 'glyphicon-chevron-right': step.collapsedSections.type}"></span> Type</div>
                       <div class="panel-body" ng-hide="step.collapsedSections.type">
@@ -194,41 +242,6 @@
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('value')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.value, 'glyphicon-chevron-right': step.collapsedSections.value}"></span> Value</div>
-                      <div class="panel-body" ng-hide="step.collapsedSections.value">
-                        <form class="form-horizontal">
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">Specific Value:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.value_specific">
-                                <option value="p-3">3</option>
-                                <option value="p-2">2</option>
-                                <option value="p-1">1</option>
-                                <option value="zero" selected>0</option>
-                                <option value="n-1">-1</option>
-                                <option value="n-2">-2</option>
-                                <option value="n-3">-3</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">Generic Value:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.value_generic">
-                                <option value="p-3">3</option>
-                                <option value="p-2">2</option>
-                                <option value="p-1">1</option>
-                                <option value="zero" selected>0</option>
-                                <option value="n-1">-1</option>
-                                <option value="n-2">-2</option>
-                                <option value="n-3">-3</option>
-                              </select>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
                       <div class="panel-heading" ng-click="step.toggleSectionVisibility('other')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.other, 'glyphicon-chevron-right': step.collapsedSections.other}"></span> Other Options</div>
                       <div class="panel-body" ng-hide="step.collapsedSections.other">
                         <form>
@@ -238,37 +251,6 @@
                             </label>
                           </div>
                         </form>
-                      </div>
-                    </div>
-                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems</div>
-                      <div class="panel-body" ng-hide="step.collapsedSections.problems">
-                        <div class="well well-sm" ng-repeat="problem in step.problems">
-                          <form class="form-horizontal">
-                            <div class="form-group">
-                              <label class="col-sm-2 control-label">Problem type:</label>
-                              <div class="col-sm-10">
-                                <select class="form-control" ng-model="problem.type">
-                                  <option value="inconvenient">Inconvenient</option>
-                                  <option value="confusing">Confusing</option>
-                                  <option value="difficult">Difficult</option>
-                                  <option value="likely_to_fail">Likely to fail</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-sm-2 control-label">Reason:</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Reason..." ng-model="problem.description">
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="row">
-                          <div class="col-xs-12">
-                            <a class="btn btn-success" ng-click="step.addProblem()"><span class="glyphicon glyphicon-plus"></span> Add Problem</a>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>

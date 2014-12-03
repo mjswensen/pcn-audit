@@ -17,7 +17,7 @@
         // Members
 
         this.id = guid();
-        this.title = 'New Step';
+        this.title = '';
         this.type = 'process';
         this.position = 'ip-provider';
         this.valueSpecific = '0';

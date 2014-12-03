@@ -36,6 +36,31 @@
         });
       };
 
+      this.isFirstStep = function(step) {
+        return step === this.data.steps[0];
+      };
+
+      this.isLastStep = function(step) {
+        return step === this.data.steps[this.data.steps.length-1];
+      };
+
+      this.moveStepUp = function(step) {
+        var idx = this.data.steps.indexOf(step);
+        this.data.steps.splice(idx, 1);
+        this.data.steps.splice(idx-1, 0, step);
+      };
+
+      this.moveStepDown = function(step) {
+        var idx = this.data.steps.indexOf(step);
+        this.data.steps.splice(idx, 1);
+        this.data.steps.splice(idx+1, 0, step);
+      };
+
+      this.removeStep = function(step) {
+        var idx = this.data.steps.indexOf(step);
+        this.data.steps.splice(idx, 1);
+      };
+
     }
   ]);
 

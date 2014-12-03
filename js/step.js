@@ -20,8 +20,8 @@
         this.title = 'New Step';
         this.type = 'process';
         this.position = 'ip-provider';
-        this.value_specific = 'zero';
-        this.value_generic = 'zero';
+        this.valueSpecific = '0';
+        this.valueGeneric = '0';
         this.emphasized = false;
         this.predecessors = [];
         this.problems = [];
@@ -70,6 +70,26 @@
           for (var key in this.collapsedSections) {
             this.collapsedSections[key] = collapsed;
           }
+        };
+
+        // Serialize
+
+        this.serialize = function() {
+          return {
+            id: this.id,
+            title: this.title,
+            type: this.type,
+            position: this.position,
+            value_specific: parseInt(this.valueSpecific, 10),
+            value_generic: parseInt(this.valueGeneric, 10),
+            emphasized: this.emphasized,
+            predecessors: this.predecessors.map(function(predecessor) {
+              return predecessor.serialize();
+            }),
+            problems: this.problems.map(function(problem) {
+              return problem.serialize();
+            })
+          };
         };
 
       }

@@ -7,6 +7,13 @@
     function Problem() {
       this.type = 'inconvenient';
       this.description = '';
+
+      this.serialize = function() {
+        return {
+          type: this.type,
+          description: this.description
+        };
+      };
     }
 
     return Problem;

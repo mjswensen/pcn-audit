@@ -8,6 +8,14 @@
       this.id = '';
       this.type = 'normal';
       this.title = '';
+
+      this.serialize = function() {
+        return {
+          id: this.id,
+          type: this.type,
+          title: this.title
+        };
+      };
     }
 
     return Predecessor;

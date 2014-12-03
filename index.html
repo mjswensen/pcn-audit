@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="pcnAudit">
 <head>
   <meta charset="utf-8">
@@ -79,10 +79,10 @@
                 </form>
               </div>
               <div class="col-sm-6">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default" ng-click="stepsCtrl.expandAll()">Expand all</button>
-                  <button type="button" class="btn btn-default" ng-click="stepsCtrl.collapseAll()">Collapse all</button>
-                </div>
+                  <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-default" ng-click="stepsCtrl.expandAll()">Expand all</button>
+                      <button type="button" class="btn btn-default" ng-click="stepsCtrl.collapseAll()">Collapse all</button>
+                  </div>
               </div>
             </div>
             <hr>
@@ -90,7 +90,7 @@
               <div class="col-xs-12">
                 <div class="panel panel-info">
                   <div class="panel-heading" ng-click="step.toggleVisibility()">
-                    <span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}"></span><input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
+                      <span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}" style="padding-right: 1%;"></span><input type="text" class="form-control" placeholder="Step title..." ng-model="step.title" style="display: inline; width: 96%;"><span style="padding-left: 1%; cursor: pointer; font-weight: bold;">X</span>
                   </div>
                   <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">
@@ -118,6 +118,27 @@
                           </select>
                         </div>
                       </div>
+                    </form>
+                    <form class="form-horizontal" ng-show="stepsCtrl.showAdvanced">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Type:</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" ng-model="step.type">
+                                    <option value="process">Process</option>
+                                    <option value="decision">Decision</option>
+                                    <option value="wait">Wait</option>
+                                    <option value="divergent-process">Divergent Process</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" ng-show="stepsCtrl.showAdvanced">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Emphasized:</label>
+                            <div class="col-sm-8" style="margin-top: 7px;">
+                                <input type="checkbox" ng-model="step.emphasized"> 
+                            </div>
+                        </div>
                     </form>
                     <div class="panel panel-default" ng-hide="step.collapsed">
                       <div class="panel-heading" ng-click="step.toggleSectionVisibility('problems')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.problems, 'glyphicon-chevron-right': step.collapsedSections.problems}"></span> Problems</div>
@@ -148,24 +169,6 @@
                             <a class="btn btn-success" ng-click="step.addProblem()"><span class="glyphicon glyphicon-plus"></span> Add Problem</a>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('type')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.type, 'glyphicon-chevron-right': step.collapsedSections.type}"></span> Type</div>
-                      <div class="panel-body" ng-hide="step.collapsedSections.type">
-                        <form class="form-horizontal">
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">Type:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.type">
-                                <option value="process">Process</option>
-                                <option value="decision">Decision</option>
-                                <option value="wait">Wait</option>
-                                <option value="divergent-process">Divergent Process</option>
-                              </select>
-                            </div>
-                          </div>
-                        </form>
                       </div>
                     </div>
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
@@ -239,18 +242,6 @@
                             <a class="btn btn-success" ng-click="step.addPredecessor()"><span class="glyphicon glyphicon-plus"></span> Add Predecessor</a>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('other')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.other, 'glyphicon-chevron-right': step.collapsedSections.other}"></span> Other Options</div>
-                      <div class="panel-body" ng-hide="step.collapsedSections.other">
-                        <form>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" ng-model="step.emphasized"> Emphasized
-                            </label>
-                          </div>
-                        </form>
                       </div>
                     </div>
                   </div>

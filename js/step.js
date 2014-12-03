@@ -32,6 +32,11 @@
           this.predecessors.push(new Predecessor());
         };
 
+        this.removePredecessor = function(predecessor) {
+          var idx = this.predecessors.indexOf(predecessor);
+          this.predecessors.splice(idx, 1);
+        };
+
         this.addProblem = function() {
           this.problems.push(new Problem());
         };

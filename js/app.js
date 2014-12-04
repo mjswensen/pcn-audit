@@ -20,7 +20,13 @@
       this.steps = [];
 
       this.addStep = function() {
+        var lastIndex = this.steps.length - 1
         this.steps.push(new Step());
+        if (lastIndex > 0) {
+          if (this.steps[lastIndex].collapsed === false) {
+            this.steps[lastIndex + 1].collapsed = false
+          }
+        }
       };
 
       this.expandAll = function() {

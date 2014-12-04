@@ -124,5 +124,32 @@
 
     }
   ]);
+    
+  app.directive('autofocusNewInput', function() {
+    return {
+      priority: 1,
+      link: function(scope, element, attr) {
+        scope.$watch(attr.autofocusNewInput, function(value) {
+          if(value === true) {
+            element[0].focus()
+            scope[attr.autofocusNewInput] = false
+          } // if true
+        }) // function
+      } // link
+    } // return
+  }) // autofocusNewInput
+  
+  app.directive('enterOnInput', function() {
+    return {
+      priority: 1,
+      link: function(scope, element, attr) {
+        element.bind('keypress', function(event) {
+          if(event.which === 13) {
+            scope.$apply(attr.enterOnInput)
+          } // if enter key
+        }) // bind
+      } // link
+    } // return
+  }) // enterOnInput
 
 })();

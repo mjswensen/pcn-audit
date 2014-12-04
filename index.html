@@ -96,7 +96,7 @@
                       <span ng-hide="stepsCtrl.isLastStep(step)" ng-click="stepsCtrl.moveStepDown(step)" class="glyphicon glyphicon-chevron-down"></span>
                       <span class="glyphicon glyphicon-minus" ng-click="stepsCtrl.removeStep(step)"></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
+                    <input type="text" class="form-control" placeholder="Step title..." ng-model="step.title" enter-on-input="stepsCtrl.addStep()" autofocus-new-input="focusInput">
                   </div>
                   <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">
@@ -260,7 +260,7 @@
             </div>
             <div class="row">
               <div class="col-xs-12">
-                <a class="btn btn-success" ng-click="stepsCtrl.addStep()"><span class="glyphicon glyphicon-plus"></span> Add Step</a>
+                <a id="addStepBtn" class="btn btn-success" ng-click="stepsCtrl.addStep(); focusInput=true"><span class="glyphicon glyphicon-plus"></span> Add Step</a>
               </div>
             </div>
           </div>

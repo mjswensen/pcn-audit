@@ -50,7 +50,7 @@
 
         // UI
 
-        this.collapsed = false;
+        this.collapsed = true;
 
         this.toggleVisibility = function() {
           this.collapsed = !this.collapsed;

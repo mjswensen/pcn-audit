@@ -1,6 +1,6 @@
 # pcn-audit #
 
-The pcn-audit tool allows those who are engaged in the PCN analysis data collection process to generate a standardized PCN data object which other processing tools can then use to generate a PCN diagram. For complete details on the data format (spec) used in the audit tool, please visit the [PCN Spec GitHub repository](https://github.com/mjswensen/pcn-spec).
+The pcn-audit tool allows those who are engaged in the PCN analysis data collection process to generate a standardized PCN data object which other processing tools can then use to generate a PCN diagram. For complete details on the data format (spec) used in the audit tool, please visit the [PCN Spec GitHub repository](https://github.com/pcnsuite/pcnspec).
 
 **_NOTE:_** this tool is intended to take the place of Dr. Scott Sampson's paper PCN audit form.
 
@@ -32,7 +32,7 @@ Using this standard data format for representing data collected through PCN Anal
 
 ## PCN Audit Tool walkthrough ##
 
-The following subsections outline the functions of the different parts of the PCN audit tool. This section will provide a brief description of the form fields, as well as how the tool functions. Consult the [PCN Spec GitHub repository](https://github.com/mjswensen/pcn-spec) for a more detailed explanation of all of the different form fields.
+The following subsections outline the functions of the different parts of the PCN audit tool. This section will provide a brief description of the form fields, as well as how the tool functions. Consult the [PCN Spec GitHub repository](https://github.com/pcnsuite/pcnspec) for a more detailed explanation of all of the different form fields.
 
 ### Process information ###
 
@@ -98,7 +98,7 @@ Fields are broken up by container. All of the fields except for Step Title, Spec
 
 ### Input information ###
 
-This is the textarea in which the finalized PCN data object will render in JSON. Simply highlight the data within the textarea, press 'CTRL + C' to copy the data, and then paste it into the rendering program of your choice. 
+This is the textarea in which the finalized PCN data object will render in JSON. Simply highlight the data within the textarea, press 'CTRL + C' to copy the data, and then paste it into the rendering program of your choice.
 
 #### Features ####
 

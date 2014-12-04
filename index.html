@@ -91,13 +91,12 @@
                 <div class="panel panel-info">
                   <div class="panel-heading">
                     <span ng-click="step.toggleVisibility()" class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsed, 'glyphicon-chevron-right': step.collapsed}"></span>
-                    &nbsp;&nbsp;
-                    <input type="text" class="form-control" style="display: inline; width: auto;" placeholder="Step Title" ng-model="step.title">
                     <div class="pull-right">
                       <span ng-hide="stepsCtrl.isFirstStep(step)" ng-click="stepsCtrl.moveStepUp(step)" class="glyphicon glyphicon-chevron-up"></span>
                       <span ng-hide="stepsCtrl.isLastStep(step)" ng-click="stepsCtrl.moveStepDown(step)" class="glyphicon glyphicon-chevron-down"></span>
                       <span class="glyphicon glyphicon-minus" ng-click="stepsCtrl.removeStep(step)"></span>
                     </div>
+                    <input type="text" class="form-control" placeholder="Step Title" ng-model="step.title">
                   </div>
                   <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">

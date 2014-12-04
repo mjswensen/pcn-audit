@@ -20,6 +20,8 @@
         this.title = '';
         this.type = 'process';
         this.position = 'ip-provider';
+        this.domain = {};
+        this.domain.region = {};
         this.valueSpecific = '0';
         this.valueGeneric = '0';
         this.emphasized = false;
@@ -89,7 +91,13 @@
             id: this.id,
             title: this.title,
             type: this.type,
-            position: this.position,
+            domain: {
+                id: this.domain.id,
+                region: {
+                  type: this.domain.region.type,
+                  with_domain: this.domain.region.with_domain
+                }
+            },
             value_specific: parseInt(this.valueSpecific, 10),
             value_generic: parseInt(this.valueGeneric, 10),
             emphasized: this.emphasized,

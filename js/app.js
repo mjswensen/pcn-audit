@@ -60,6 +60,60 @@
         this.steps.splice(idx, 1);
       };
 
+      this.getDomainInfo = function(step) {
+          switch(step.domain.combined) {
+            case "pro-in-cus":
+                step.domain.id = this.domains[0].id;
+                step.domain.region = {
+                    type: "independent",
+                    with_domain: this.domains[1].id
+                };
+                break;
+            case "pro-sur-cus":
+                step.domain.id = this.domains[0].id;
+                step.domain.region = {
+                    type: "surrogate",
+                    with_domain: this.domains[1].id
+                };
+                break;
+            case "pro-lead-direct-cus":
+                step.domain.id = this.domains[0].id;
+                step.domain.region = {
+                    type: "direct_leading",
+                    with_domain: this.domains[1].id
+                };
+                break;
+            case "pro-direct-cus":
+                step.domain.id = this.domains[0].id;
+                step.domain.region = {
+                    type: "direct_shared",
+                    with_domain: this.domains[1].id
+                };
+                break;
+            case "cus-lead-direct-pro":
+                step.domain.id = this.domains[1].id;
+                step.domain.region = {
+                    type: "direct_leading",
+                    with_domain: this.domains[0].id
+                };
+                break;
+            case "cus-sur-pro":
+                step.domain.id = this.domains[1].id;
+                step.domain.region = {
+                    type: "surrogate",
+                    with_domain: this.domains[0].id
+                };
+                break;
+            case "cus-in-pro":
+                step.domain.id = this.domains[1].id;
+                step.domain.region = {
+                    type: "independent",
+                    with_domain: this.domains[0].id
+                };
+                break;
+          }
+        };
+
       this.serialize = function() {
         return {
           metadata: this.metadata,

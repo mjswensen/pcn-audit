@@ -96,7 +96,7 @@
                       <span ng-hide="stepsCtrl.isLastStep(step)" ng-click="stepsCtrl.moveStepDown(step)" class="glyphicon glyphicon-chevron-down"></span>
                       <span class="glyphicon glyphicon-minus" ng-click="stepsCtrl.removeStep(step)"></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Step Title" ng-model="step.title">
+                    <input type="text" class="form-control" placeholder="Step title..." ng-model="step.title">
                   </div>
                   <div class="panel-body" ng-hide="step.collapsed">
                     <form class="form-horizontal">
@@ -135,6 +135,22 @@
                             <option value="decision">Decision</option>
                             <option value="wait">Wait</option>
                             <option value="divergent-process">Divergent Process</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                    <form class="form-horizontal" ng-show="stepsCtrl.showAdvanced">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Position:</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" ng-model="step.domain.combined" ng-change="stepsCtrl.getDomainInfo(step)">
+                            <option value="pro-in-cus">Provider Independent</option>
+                            <option value="pro-sur-cus">Provider Surrogate</option>
+                            <option value="pro-lead-direct-cus">Provider-lead Direct</option>
+                            <option value="pro-direct-cus">Shared Direct</option>
+                            <option value="cus-lead-direct-pro">Customer-lead Direct</option>
+                            <option value="cus-sur-pro">Customer Surrogate</option>
+                            <option value="cus-in-pro">Customer Independent</option>
                           </select>
                         </div>
                       </div>
@@ -192,41 +208,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
-                      <div class="panel-heading" ng-click="step.toggleSectionVisibility('position')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.position, 'glyphicon-chevron-right': step.collapsedSections.position}"></span> Position</div>
-                      <div class="panel-body" ng-hide="step.collapsedSections.position">
-                        <form class="form-horizontal">
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">This Entity:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.domain.id">
-                                <option ng-repeat="domain in stepsCtrl.domains" ng-value="domain.id">{{ domain.title }}</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">In Region:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.domain.region.type">
-                                <option value="independent">Independent</option>
-                                <option value="surrogate">Surrogate</option>
-                                <option value="direct_leading">Direct Leading</option>
-                                <option value="direct_shared">Direct Shared</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">With:</label>
-                            <div class="col-sm-10">
-                              <select class="form-control" ng-model="step.domain.region.with_domain">
-                                <option value="">None</option>
-                                <option ng-repeat="domain in stepsCtrl.domains" ng-value="domain.id">{{ domain.title }}</option>
-                              </select>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                    
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
                       <div class="panel-heading" ng-click="step.toggleSectionVisibility('predecessors')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.predecessors, 'glyphicon-chevron-right': step.collapsedSections.predecessors}"></span> Predecessors</div>
                       <div class="panel-body" ng-hide="step.collapsedSections.predecessors">
@@ -252,8 +234,8 @@
                               <label class="col-sm-2 control-label">Relationship</label>
                               <div class="col-sm-10">
                                 <select class="form-control" ng-model="predecessor.type">
-                                  <option value="normal">Normal</option>
-                                  <option value="loose-temporal">Loose Temporal</option>
+                                  <option value="normal_relationship">Normal</option>
+                                  <option value="loose_temporal_relationship">Loose Temporal</option>
                                 </select>
                               </div>
                             </div>

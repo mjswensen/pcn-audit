@@ -159,8 +159,12 @@
                       <div class="panel-body" ng-hide="step.collapsedSections.problems">
                         <div class="well well-sm" ng-repeat="problem in step.problems">
                           <form class="form-horizontal">
-                            <div class="pull-right">
-                              <span class="glyphicon glyphicon-minus" ng-click="step.removeProblem(problem)"></span>
+                            <div class="form-group">
+                              <div class="col-xs-12">
+                                <div class="pull-right">
+                                  <span class="glyphicon glyphicon-minus" ng-click="step.removeProblem(problem)"></span>
+                                </div>
+                              </div>
                             </div>
                             <div class="form-group">
                               <label class="col-sm-2 control-label">Problem type:</label>
@@ -228,8 +232,12 @@
                       <div class="panel-body" ng-hide="step.collapsedSections.predecessors">
                         <div class="well well-sm" ng-repeat="predecessor in step.predecessors">
                           <form class="form-horizontal">
-                            <div class="pull-right">
-                              <span class="glyphicon glyphicon-minus" ng-click="step.removePredecessor(predecessorStep)"></span>
+                            <div class="form-group">
+                              <div class="col-xs-12">
+                                <div class="pull-right">
+                                  <span class="glyphicon glyphicon-minus" ng-click="step.removePredecessor(predecessorStep)"></span>
+                                </div>
+                              </div>
                             </div>
                             <div class="form-group">
                               <label class="col-sm-2 control-label">Step:</label>

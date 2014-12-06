@@ -143,7 +143,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Position:</label>
                         <div class="col-sm-10">
-                          <select class="form-control" ng-model="step.domain.combined" ng-change="stepsCtrl.getDomainInfo(step)">
+                          <select class="form-control" ng-model="step.domain">
                             <option value="pro-in-cus">Provider Independent</option>
                             <option value="pro-sur-cus">Provider Surrogate</option>
                             <option value="pro-lead-direct-cus">Provider-lead Direct</option>
@@ -208,7 +208,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="panel panel-default" ng-show="stepsCtrl.showAdvanced">
                       <div class="panel-heading" ng-click="step.toggleSectionVisibility('predecessors')"><span class="glyphicon" ng-class="{'glyphicon-chevron-down': !step.collapsedSections.predecessors, 'glyphicon-chevron-right': step.collapsedSections.predecessors}"></span> Predecessors</div>
                       <div class="panel-body" ng-hide="step.collapsedSections.predecessors">

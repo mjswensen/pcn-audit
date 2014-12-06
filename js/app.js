@@ -15,16 +15,16 @@
       this.domains[1] = {};
       this.domains[0].id = guid();
       this.domains[1].id = guid();
-      this.domains[0].subtitle = "provider";
-      this.domains[1].subtitle = "customer";
+      this.domains[0].subtitle = 'Provider';
+      this.domains[1].subtitle = 'Customer';
       this.steps = [];
 
       this.addStep = function() {
-        var lastIndex = this.steps.length - 1
-        this.steps.push(new Step());
+        var lastIndex = this.steps.length - 1;
+        this.steps.push(new Step(this));
         if (lastIndex > 0) {
           if (this.steps[lastIndex].collapsed === false) {
-            this.steps[lastIndex + 1].collapsed = false
+            this.steps[lastIndex + 1].collapsed = false;
           }
         }
       };
@@ -66,96 +66,57 @@
         this.steps.splice(idx, 1);
       };
 
-      this.getDomainInfo = function(step) {
-          switch(step.domain.combined) {
-            case "pro-in-cus":
-                step.domain.id = this.domains[0].id;
-                step.domain.region = {
-                    type: "independent",
-                    with_domain: this.domains[1].id
-                };
-                break;
-            case "pro-sur-cus":
-                step.domain.id = this.domains[0].id;
-                step.domain.region = {
-                    type: "surrogate",
-                    with_domain: this.domains[1].id
-                };
-                break;
-            case "pro-lead-direct-cus":
-                step.domain.id = this.domains[0].id;
-                step.domain.region = {
-                    type: "direct_leading",
-                    with_domain: this.domains[1].id
-                };
-                break;
-            case "pro-direct-cus":
-                step.domain.id = this.domains[0].id;
-                step.domain.region = {
-                    type: "direct_shared",
-                    with_domain: this.domains[1].id
-                };
-                break;
-            case "cus-lead-direct-pro":
-                step.domain.id = this.domains[1].id;
-                step.domain.region = {
-                    type: "direct_leading",
-                    with_domain: this.domains[0].id
-                };
-                break;
-            case "cus-sur-pro":
-                step.domain.id = this.domains[1].id;
-                step.domain.region = {
-                    type: "surrogate",
-                    with_domain: this.domains[0].id
-                };
-                break;
-            case "cus-in-pro":
-                step.domain.id = this.domains[1].id;
-                step.domain.region = {
-                    type: "independent",
-                    with_domain: this.domains[0].id
-                };
-                break;
+      this.serialzeDomains = function() {
+        return [
+          {
+            id: this.domains[0].id,
+            title: this.domains[0].title || 'Provider',
+            subtitle: this.domains[0].subtitle
+          },
+          {
+            id: this.domains[1].id,
+            title: this.domains[1].title || 'Customer',
+            subtitle: this.domains[1].subtitle
           }
-        };
+        ];
+      };
 
       this.serialize = function() {
         return {
           metadata: this.metadata,
-          domains: this.domains,
+          domains: this.serialzeDomains(),
           steps: this.steps.map(function(step) { return step.serialize(); })
         };
       };
 
     }
   ]);
-    
+
   app.directive('autofocusNewInput', function() {
     return {
       priority: 1,
       link: function(scope, element, attr) {
         scope.$watch(attr.autofocusNewInput, function(value) {
           if(value === true) {
-            element[0].focus()
-            scope[attr.autofocusNewInput] = false
+            element[0].focus();
+            scope[attr.autofocusNewInput] = false;
           } // if true
-        }) // function
+        }); // function
       } // link
-    } // return
-  }) // autofocusNewInput
-  
+    }; // return
+  }); // autofocusNewInput
+
   app.directive('enterOnInput', function() {
     return {
       priority: 1,
       link: function(scope, element, attr) {
         element.bind('keypress', function(event) {
           if(event.which === 13) {
-            scope.$apply(attr.enterOnInput)
+            scope.$apply(attr.enterOnInput);
           } // if enter key
-        }) // bind
+        }); // bind
       } // link
-    } // return
-  }) // enterOnInput
+    }; // return
+  }); // enterOnInput
 
 })();

@@ -6,7 +6,7 @@
 
     function Predecessor() {
       this.id = '';
-      this.type = 'normal';
+      this.type = 'normal_relationship';
       this.title = '';
 
       this.serialize = function() {

@@ -12,16 +12,16 @@
     'Problem',
     function(guid, Predecessor, Problem) {
 
-      function Step() {
+      function Step(parentController) {
+
+        this.parentController = parentController;
 
         // Members
 
         this.id = guid();
         this.title = '';
         this.type = 'process';
-        this.position = 'ip-provider';
-        this.domain = {};
-        this.domain.region = {};
+        this.domain = 'pro-in-cus';
         this.valueSpecific = '0';
         this.valueGeneric = '0';
         this.emphasized = false;
@@ -86,18 +86,73 @@
 
         // Serialize
 
+        this.parseDomain = function() {
+          switch(this.domain) {
+            case 'pro-in-cus':
+              return {
+                id: this.parentController.domains[0].id,
+                region: {
+                  type: 'independent',
+                  with_domain: this.parentController.domains[1].id
+                }
+              };
+            case 'pro-sur-cus':
+              return {
+                id: this.parentController.domains[0].id,
+                region: {
+                  type: 'surrogate',
+                  with_domain: this.parentController.domains[1].id
+                }
+              };
+            case 'pro-lead-direct-cus':
+              return {
+                id: this.parentController.domains[0].id,
+                region: {
+                  type: 'direct_leading',
+                  with_domain: this.parentController.domains[1].id
+                }
+              };
+            case 'pro-direct-cus':
+              return {
+                id: this.parentController.domains[0].id,
+                region: {
+                  type: 'direct_shared',
+                  with_domain: this.parentController.domains[1].id
+                }
+              };
+            case 'cus-lead-direct-pro':
+              return {
+                id: this.parentController.domains[1].id,
+                region: {
+                  type: 'direct_leading',
+                  with_domain: this.parentController.domains[0].id
+                }
+              };
+            case 'cus-sur-pro':
+              return {
+                id: this.parentController.domains[1].id,
+                region: {
+                  type: 'surrogate',
+                  with_domain: this.parentController.domains[0].id
+                }
+              };
+            case 'cus-in-pro':
+              return {
+                id: this.parentController.domains[1].id,
+                region: {
+                  type: 'independent',
+                  with_domain: this.parentController.domains[0].id
+                }
+              };
+          }
+        };
+
         this.serialize = function() {
           return {
             id: this.id,
             title: this.title,
             type: this.type,
-            domain: {
-                id: this.domain.id,
-                region: {
-                  type: this.domain.region.type,
-                  with_domain: this.domain.region.with_domain
-                }
-            },
+            domain: this.parseDomain(),
             value_specific: parseInt(this.valueSpecific, 10),
             value_generic: parseInt(this.valueGeneric, 10),
             emphasized: this.emphasized,

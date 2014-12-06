@@ -119,4 +119,15 @@
     }; // return
   }); // enterOnInput
 
+  app.directive('selectOnFocus', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        element.on('focus', function () {
+            this.select();
+        });
+      }
+    };
+  });
+
 })();
